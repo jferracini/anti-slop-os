@@ -21,6 +21,15 @@ Dê o AI SLOP SCORE com justificativa por item.
 
 ### 3. AUDIT POR CAMADA
 
+Para cada camada, use **CHECK / 🟡 / 🔴** (ou Yellow / Red em texto).
+
+- **CHECK** = está OK, não precisa mexer. Só marque CHECK e siga para a próxima camada.
+- **Yellow** = atenção, considerar mexer (descreva o porquê em 1 linha).
+- **Red** = problema real, precisa mexer (descreva o problema em 1-2 linhas).
+
+Não detalhe camadas CHECK. O ponto é direcionar atenção para o que precisa mudar.
+
+
 **Tipografia**
 - Qual fonte? Justificada?
 - Tamanho mínimo respeitado?

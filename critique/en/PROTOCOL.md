@@ -1,0 +1,68 @@
+# DESIGN CRITIQUE PROTOCOL
+
+## Usage
+
+Send a screen, slide, frame, or component with the command:
+`/critique [optional context]`
+
+The output must follow this protocol.
+
+---
+
+## What to analyze (in order)
+
+### 1. FIRST READ — impression without analysis
+What does the piece communicate in 3 seconds?
+What does it fail to communicate but should?
+
+### 2. AI SLOP SCAN
+Identify forbidden patterns present from the rules list.
+Give the AI SLOP SCORE with justification per item.
+
+### 3. LAYER-BY-LAYER AUDIT
+
+For each layer, use: **CHECK / 🟡 / 🔴** (or Yellow / Red in text).
+
+- **CHECK** = layer is OK, no action needed. Just mark CHECK and move on.
+- **Yellow** = attention, consider fixing (1-line reason).
+- **Red** = real problem, must fix (1-2 line description).
+
+Do not detail CHECK layers. The point is to focus attention on what needs to change.
+
+
+**Typography**
+- Which font? Justified?
+- Minimum size respected?
+- Hierarchy legible?
+- Ratio consistent?
+- Monospace: functional or decorative?
+
+**Color**
+- How many roles? Defined?
+- Does accent create tension or comfort?
+- Does the palette have identity or feel temporal?
+
+**Spacing**
+- Identifiable system?
+- Any arbitrary value?
+- Vertical rhythm consistent?
+
+**Layout**
+- Tension axis present?
+- Centering justified?
+- Grid-break or asymmetry intentional?
+
+**Motion (if applicable)**
+- Easing: default or authorial?
+- Does every animation have a declared intention?
+
+### 4. DIAGNOSIS
+3 critical problems, ordered by impact.
+Each with: problem → root cause → specific correction.
+
+### 5. CORRECTION DIRECTION
+Not just "make it better".
+Deliver the decision: what to replace, why, and which direction to take.
+
+### 6. WHAT TO PRESERVE
+What is working and must not be touched.

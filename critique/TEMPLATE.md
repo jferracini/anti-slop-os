@@ -15,13 +15,15 @@ Itens identificados:
 
 ## Audit
 
-| Camada     | Status | Problema Específico |
-|------------|--------|---------------------|
-| Tipografia | 🔴 / 🟡 / 🟢 | |
-| Cor        | 🔴 / 🟡 / 🟢 | |
-| Spacing    | 🔴 / 🟡 / 🟢 | |
-| Layout     | 🔴 / 🟡 / 🟢 | |
-| Motion     | 🔴 / 🟡 / 🟢 | |
+Use **CHECK** quando a camada está OK e não precisa mexer (deixe a coluna de problema vazia ou só "—"). Use 🟡 ou 🔴 quando há atenção ou problema real.
+
+| Camada     | Status                | Problema Específico (só se NÃO for CHECK) |
+|------------|-----------------------|--------------------------------------------|
+| Tipografia | CHECK / 🟡 / 🔴       | |
+| Cor        | CHECK / 🟡 / 🔴       | |
+| Spacing    | CHECK / 🟡 / 🔴       | |
+| Layout     | CHECK / 🟡 / 🔴       | |
+| Motion     | CHECK / 🟡 / 🔴       | |
 
 ## Top 3 Problemas Críticos
 
