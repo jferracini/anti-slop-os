@@ -250,6 +250,46 @@ Items identified:
 
 ---
 
+## Web URL critique
+
+When the user triggers `/slop-check <url>` or `/critique <url>` with a non-Figma URL:
+
+### Path A — URL accessible
+
+1. Fetch the URL content.
+2. Apply the full critique protocol against the rendered page.
+3. Note at the end: `Critique via URL fetch.`
+
+### Path B — URL blocked or inaccessible (screenshot fallback)
+
+This is a first-class path, not a degraded mode. Use when fetch fails, returns a bot-block, requires auth, or is a localhost address.
+
+**Do not output a bare sentence saying the site is blocked.** Use this exact format:
+
+```
+## ⚠️ URL inacessível para critique automático
+
+**URL:** `<url>`
+**Motivo:** <blocked by bot protection / localhost / requires auth / other>
+
+Para aplicar o protocolo completo, cole um screenshot aqui:
+
+→ **Chrome/Arc:** Cmd+Shift+P → "Capture full size screenshot"
+→ **Mac:** Cmd+Shift+4 (área) ou Cmd+Shift+3 (tela cheia)
+→ **Qualquer resolução serve.** PNG @2x é ideal, mas não obrigatório.
+
+Assim que receber a imagem, aplico First Read + Slop Score + Audit completo.
+```
+
+**Once the screenshot arrives**, apply the full critique protocol — same first read, same Slop Score, same audit table, same top 3, same direction, same preserve. Do not downgrade the output.
+
+**At the end of the critique**, append one line:
+`Critique via screenshot fallback (URL inacessível).`
+
+**Never guess or invent page content from the URL.** Critiquing imagined content is exactly the kind of slop this skill exists to prevent.
+
+---
+
 ## Figma critique
 
 When the user triggers `/critique-figma <url>`:
