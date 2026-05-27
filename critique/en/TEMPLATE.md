@@ -24,6 +24,7 @@ Use **CHECK** when a layer is OK and needs no action (leave problem column empty
 | Spacing    | CHECK / 🟡 / 🔴       | |
 | Layout     | CHECK / 🟡 / 🔴       | |
 | Motion     | CHECK / 🟡 / 🔴       | |
+| Accessibility | CHECK / 🟡 / 🔴    | |
 
 ## Top 3 Critical Problems
 

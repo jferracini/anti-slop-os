@@ -10,6 +10,7 @@
 3. Una interfaz "demasiado limpia" es una interfaz sin identidad
 4. La tensión no es un error — es lo que hace que algo sea memorable
 5. La IA acelera la exploración. La autoría sigue siendo humana.
+6. La accesibilidad no es una restricción — es prueba de que una decisión fue tomada para un usuario real, no para un portfolio
 
 ## Lo que construimos
 

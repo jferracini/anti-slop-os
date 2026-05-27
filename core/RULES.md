@@ -43,6 +43,7 @@
 - PROIBIDO: animações que replicam Framer/Linear/Vercel sem desvio
 - OBRIGATÓRIO: cada animação responde "o que isso comunica?"
 - Easing deve ter personalidade — não apenas ease-in-out genérico
+- OBRIGATÓRIO: respeitar prefers-reduced-motion — toda animação oferece alternativa estática
 - 1 momento de animação bem executado > 10 micro-interações medianas
 
 ## COMPONENTES
@@ -50,6 +51,15 @@
 - Nenhum componente existe sem responder: qual problema resolve neste contexto?
 - PROIBIDO: copiar padrões de Stripe, Linear, Notion, Vercel como referência direta
 - Inspire-se. Não replique.
+
+## ACESSIBILIDADE
+
+- Contraste mínimo 4.5:1 para texto, 3:1 para componentes UI e estados
+- PROIBIDO: cor como único diferenciador semântico
+- OBRIGATÓRIO: estado de foco visível em todos os elementos interativos
+- OBRIGATÓRIO: hierarquia de leitura navegável via teclado
+- Assimetria e grid-breaks devem permanecer navegáveis — tensão visual não pode bloquear acesso
+- prefers-reduced-motion: toda animação tem alternativa estática ou reduzida
 
 ## OUTPUT GATE — obrigatório antes de qualquer entrega
 

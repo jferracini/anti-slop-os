@@ -15,6 +15,8 @@ Marque cada item presente na solução.
 - [ ] Paleta parece "AI SaaS 2024"
 - [ ] Hero section vazia com texto genérico
 - [ ] Cards onde lista resolve
+- [ ] Estado de foco ausente ou invisível em elementos interativos
+- [ ] Cor como único diferenciador semântico (erro sinalizado só por cor)
 
 ### Reduz o score (-1 cada)
 - [ ] Decisão tipográfica justificada em 1 linha
@@ -24,6 +26,7 @@ Marque cada item presente na solução.
 - [ ] Componente que não existiria sem este contexto específico
 - [ ] Motion com easing próprio, não default
 - [ ] Assimetria ou grid-break intencional
+- [ ] Contraste auditado (texto ≥4.5:1, UI ≥3:1) e foco visível
 
 ## Score Resultado
 
@@ -41,4 +44,5 @@ Marque cada item presente na solução.
 - [ ] Spacing: 100% dentro do sistema
 - [ ] Layout: eixo de tensão declarado
 - [ ] Motion: easing justificado ou ausente
+- [ ] Acessibilidade: contraste ≥4.5:1 texto, foco visível, cor não é único semântico
 - [ ] AI SLOP SCORE: 0–2

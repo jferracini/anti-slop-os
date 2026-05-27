@@ -37,6 +37,7 @@ Operational truths:
 3. An interface that is "too clean" is an interface without identity.
 4. Tension is not a bug — it is what makes something memorable.
 5. AI accelerates exploration. Authorship remains human.
+6. Accessibility is not a constraint — it is proof that a decision was made for a real user, not a portfolio.
 
 What this skill builds: intention, identity, tension, meaning, memorable experience.
 What this skill refuses to build: templates, UI kits, statistically correct landing pages.
@@ -88,6 +89,7 @@ What this skill refuses to build: templates, UI kits, statistically correct land
 - BANNED: animations that replicate Framer, Linear, or Vercel without deviation.
 - REQUIRED: every animation answers "what does this communicate?".
 - Easing must have personality, not generic ease-in-out.
+- REQUIRED: respect `prefers-reduced-motion` — every animation has a static or reduced fallback.
 - One well-executed animation moment beats ten mediocre micro-interactions.
 
 ### Components
@@ -95,6 +97,15 @@ What this skill refuses to build: templates, UI kits, statistically correct land
 - No component exists without answering: what problem does it solve in this context?
 - BANNED: direct replication of Stripe, Linear, Notion, or Vercel patterns.
 - Be inspired. Do not replicate.
+
+### Accessibility
+
+- Minimum contrast 4.5:1 for text, 3:1 for UI components and states.
+- BANNED: color as the sole semantic differentiator.
+- REQUIRED: visible focus state on all interactive elements.
+- REQUIRED: reading hierarchy navigable via keyboard.
+- Asymmetry and grid-breaks must remain navigable — visual tension cannot block access.
+- `prefers-reduced-motion`: every animation has a static or reduced fallback.
 
 ---
 
@@ -135,6 +146,8 @@ Adds +1 each:
 - Palette looks like "AI SaaS 2024"
 - Empty hero section with generic copy
 - Cards where a list would solve it
+- Missing or invisible focus state on interactive elements
+- Color as sole semantic differentiator (error shown by color only)
 
 Subtracts -1 each:
 - Typographic decision justified in one line
@@ -144,6 +157,7 @@ Subtracts -1 each:
 - Component that would not exist without this specific context
 - Motion with its own easing, not default
 - Intentional asymmetry or grid-break
+- Contrast audited (text ≥4.5:1, UI ≥3:1) and focus visible
 
 **Score thresholds:**
 
@@ -171,7 +185,9 @@ Do not write specific problems for CHECK layers. The point is to focus attention
 
 **Layout:** tension axis present? Is centering justified? Grid-break or asymmetry intentional?
 
-**Motion (if applicable):** easing default or authorial? Each animation has a declared intention?
+**Motion (if applicable):** easing default or authorial? Each animation has a declared intention? Is `prefers-reduced-motion` considered?
+
+**Accessibility:** text contrast ≥4.5:1? UI components ≥3:1? Color sole semantic differentiator anywhere? Focus state visible on all interactives? Reading hierarchy keyboard-navigable?
 
 ### 4. Diagnosis
 Surface the top 3 critical problems ordered by impact. For each: problem → root cause → specific correction.
@@ -209,6 +225,7 @@ Items identified:
 | Spacing    | CHECK / Yellow / Red    | |
 | Layout     | CHECK / Yellow / Red    | |
 | Motion     | CHECK / Yellow / Red    | |
+| Accessibility | CHECK / Yellow / Red | |
 
 ## Top 3 critical problems
 

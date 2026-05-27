@@ -24,6 +24,7 @@ Usa **CHECK** cuando una capa está OK y no necesita acción (deja la columna de
 | Spacing    | CHECK / 🟡 / 🔴       | |
 | Layout     | CHECK / 🟡 / 🔴       | |
 | Motion     | CHECK / 🟡 / 🔴       | |
+| Accesibilidad | CHECK / 🟡 / 🔴    | |
 
 ## Top 3 Problemas Críticos
 

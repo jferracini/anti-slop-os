@@ -15,6 +15,8 @@ Check every item present in the solution.
 - [ ] Palette looks like "AI SaaS 2024"
 - [ ] Empty hero section with generic copy
 - [ ] Cards where a list would solve it
+- [ ] Missing or invisible focus state on interactive elements
+- [ ] Color as sole semantic differentiator (error signaled by color only)
 
 ### Subtracts from score (-1 each)
 - [ ] Typographic decision justified in 1 line
@@ -24,6 +26,7 @@ Check every item present in the solution.
 - [ ] Component that would not exist without this specific context
 - [ ] Motion with its own easing, not default
 - [ ] Intentional asymmetry or grid-break
+- [ ] Contrast audited (text ≥4.5:1, UI ≥3:1) and focus visible
 
 ## Score outcome
 
@@ -41,4 +44,5 @@ Check every item present in the solution.
 - [ ] Spacing: 100% inside the system
 - [ ] Layout: tension axis declared
 - [ ] Motion: easing justified or absent
+- [ ] Accessibility: contrast ≥4.5:1 text, focus visible, color not sole semantic signal
 - [ ] AI SLOP SCORE: 0–2

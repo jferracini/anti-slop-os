@@ -10,6 +10,7 @@
 3. An interface that is "too clean" is an interface without identity
 4. Tension is not a bug — it is what makes something memorable
 5. AI accelerates exploration. Authorship remains human.
+6. Accessibility is not a constraint — it is proof that a decision was made for a real user, not a portfolio
 
 ## What we build
 

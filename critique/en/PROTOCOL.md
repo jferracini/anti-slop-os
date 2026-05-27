@@ -55,6 +55,13 @@ Do not detail CHECK layers. The point is to focus attention on what needs to cha
 **Motion (if applicable)**
 - Easing: default or authorial?
 - Does every animation have a declared intention?
+- Is prefers-reduced-motion considered?
+
+**Accessibility**
+- Text contrast ≥4.5:1? UI components ≥3:1?
+- Is color the sole semantic differentiator anywhere?
+- Visible focus state on all interactive elements?
+- Reading hierarchy navigable via keyboard?
 
 ### 4. DIAGNOSIS
 3 critical problems, ordered by impact.

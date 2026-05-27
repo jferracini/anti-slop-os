@@ -43,6 +43,7 @@
 - BANNED: animations that replicate Framer/Linear/Vercel without deviation
 - REQUIRED: every animation answers "what does this communicate?"
 - Easing must have personality — not just generic ease-in-out
+- REQUIRED: respect prefers-reduced-motion — every animation has a static or reduced fallback
 - 1 well-executed animation moment > 10 mediocre micro-interactions
 
 ## COMPONENTS
@@ -50,6 +51,15 @@
 - No component exists without answering: what problem does it solve in this context?
 - BANNED: copying patterns from Stripe, Linear, Notion, Vercel as direct reference
 - Be inspired. Do not replicate.
+
+## ACCESSIBILITY
+
+- Minimum contrast 4.5:1 for text, 3:1 for UI components and states
+- BANNED: color as the sole semantic differentiator
+- REQUIRED: visible focus state on all interactive elements
+- REQUIRED: reading hierarchy navigable via keyboard
+- Asymmetry and grid-breaks must remain navigable — visual tension cannot block access
+- prefers-reduced-motion: every animation has a static or reduced fallback
 
 ## OUTPUT GATE — mandatory before any delivery
 

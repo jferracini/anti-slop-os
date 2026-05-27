@@ -55,6 +55,13 @@ No detalles las capas en CHECK. El punto es enfocar la atención en lo que debe 
 **Motion (si aplica)**
 - Easing: ¿default o autoral?
 - ¿Cada animación tiene intención declarada?
+- ¿Se considera prefers-reduced-motion?
+
+**Accesibilidad**
+- ¿Contraste texto ≥4.5:1? ¿Componentes UI ≥3:1?
+- ¿El color es el único diferenciador semántico en algún punto?
+- ¿Estado de foco visible en todos los interactivos?
+- ¿Jerarquía navegable mediante teclado?
 
 ### 4. DIAGNÓSTICO
 3 problemas críticos, ordenados por impacto.

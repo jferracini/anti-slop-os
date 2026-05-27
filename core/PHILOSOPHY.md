@@ -10,6 +10,7 @@
 3. Interface "limpa demais" é interface sem identidade
 4. Tensão não é erro — é o que torna algo memorável
 5. IA acelera exploração. Autoria ainda é humana.
+6. Acessibilidade não é restrição — é prova de que uma decisão foi tomada para um usuário real, não para um portfólio
 
 ## O que estamos criando
 

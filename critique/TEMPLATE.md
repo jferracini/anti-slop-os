@@ -24,6 +24,7 @@ Use **CHECK** quando a camada está OK e não precisa mexer (deixe a coluna de p
 | Spacing    | CHECK / 🟡 / 🔴       | |
 | Layout     | CHECK / 🟡 / 🔴       | |
 | Motion     | CHECK / 🟡 / 🔴       | |
+| Acessibilidade | CHECK / 🟡 / 🔴   | |
 
 ## Top 3 Problemas Críticos
 
