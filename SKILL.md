@@ -237,10 +237,47 @@ Items identified:
 
 When the user triggers `/critique-figma <url>`:
 
-1. If the Figma MCP is available in this environment, use `get_design_context` with the file key and node id from the URL to extract the frame.
-2. Apply the critique protocol above against the extracted frame data and screenshot.
-3. Return the output in the critique format above.
-4. If the Figma MCP is not available, ask the user to either share a screenshot or install the Figma MCP.
+### Path A — Figma MCP available
+
+1. Parse the URL for `file key` and `node-id`.
+2. Use `get_design_context` (or equivalent Figma MCP tool) with the file key and node id to extract the frame data and image.
+3. Apply the critique protocol above against the extracted data and image.
+4. Return the output in the critique format above.
+
+### Path B — Figma MCP not available (screenshot fallback)
+
+This is a first-class path, not a degraded mode. Treat it as the default when no Figma MCP is registered in the environment.
+
+1. **Parse the URL anyway** and report back to the user what was extracted:
+   - file key
+   - node-id
+   - file/page name (if present in the URL)
+2. **Ask for a screenshot of the frame.** Exact wording to use:
+
+   > Figma MCP não está disponível neste ambiente.
+   >
+   > Cole ou arraste aqui um screenshot do frame `<node-id>` (no Figma: selecione o frame → Cmd+Shift+E → PNG @2x). Aplico o protocolo de critique contra a imagem.
+   >
+   > Alternativa: instalar o Figma MCP (setup uma vez, depois `/critique-figma <url>` puxa automaticamente).
+3. **Once the screenshot arrives**, apply the full critique protocol against the image exactly as you would in `/critique`. Do not downgrade the output — same first read, same Slop Score, same audit table, same top 3, same direction, same preserve.
+4. **At the end of the output**, append one line acknowledging the path used:
+   `Critique via screenshot fallback (Figma MCP ausente). Para automatizar via URL, instale o Figma MCP.`
+
+### When the user shares a Figma URL but no MCP and no screenshot yet
+
+Do **not** invent the frame content. Do **not** critique based on the URL alone or guess from the file name. Always parse → ask for screenshot → wait. Critiquing imagined content is exactly the kind of slop this skill exists to prevent.
+
+### Installing the Figma MCP (reference, only mention if user asks)
+
+```bash
+claude mcp add figma-dev-mode \
+  --transport stdio \
+  --command "npx" \
+  --args "-y" "figma-developer-mcp" "--figma-api-key=YOUR_TOKEN"
+```
+
+Personal Access Token: https://www.figma.com/developers/api#access-tokens
+Restart the agent after install.
 
 ---
 
