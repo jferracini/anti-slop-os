@@ -252,41 +252,68 @@ Items identified:
 
 ## Web URL critique
 
-When the user triggers `/slop-check <url>` or `/critique <url>` with a non-Figma URL:
+When the user triggers `/slop-check <url>` or `/critique <url>` with a non-Figma URL, try paths in order:
 
-### Path A — URL accessible
+### Path A — Playwright MCP available (preferred)
 
-1. Fetch the URL content.
-2. Apply the full critique protocol against the rendered page.
-3. Note at the end: `Critique via URL fetch.`
+Use when `browser_navigate` and `browser_screenshot` tools are present in the environment.
 
-### Path B — URL blocked or inaccessible (screenshot fallback)
+1. **Navigate:** call `browser_navigate` with the URL.
+2. **Screenshot:** call `browser_screenshot` to capture the full page. Save or read the returned image.
+3. **Source analysis (localhost only):** if the URL is a localhost address, also:
+   - Identify the project root (ask the user or infer from `cwd`).
+   - Find the component(s) responsible for the route (e.g. `/demo/` → look for `src/pages/demo`, `src/app/demo`, `src/routes/demo`, `pages/demo.tsx`, etc.).
+   - Read the relevant source files (component, CSS/Tailwind classes, data).
+   - In the critique output, add a **Code layer** section after the visual audit:
+     ```
+     ## Code layer
+     [findings from source — mismatched intent, hardcoded values, class debt, etc.]
+     ```
+4. Apply the full critique protocol against the screenshot (and code if available).
+5. Append at end: `Critique via Playwright MCP.`
 
-This is a first-class path, not a degraded mode. Use when fetch fails, returns a bot-block, requires auth, or is a localhost address.
+### Path B — Playwright CLI fallback
 
-**Do not output a bare sentence saying the site is blocked.** Use this exact format:
+Use when Playwright MCP is absent but `npx` is available. Try this before asking for a manual screenshot.
+
+```bash
+npx --yes playwright screenshot --full-page "<url>" /tmp/slop-check-screenshot.png 2>&1
+```
+
+If the command succeeds, read `/tmp/slop-check-screenshot.png` as an image and proceed with the full critique protocol. Append: `Critique via Playwright CLI.`
+
+If the command fails (Playwright not installed, timeout, etc.), fall through to Path C.
+
+### Path C — Manual screenshot fallback
+
+Last resort. Use this exact format — never a bare sentence:
 
 ```
 ## ⚠️ URL inacessível para critique automático
 
 **URL:** `<url>`
-**Motivo:** <blocked by bot protection / localhost / requires auth / other>
+**Motivo:** <Playwright indisponível / bot protection / auth required / other>
 
-Para aplicar o protocolo completo, cole um screenshot aqui:
+Cole um screenshot aqui para aplicar o protocolo completo:
 
 → **Chrome/Arc:** Cmd+Shift+P → "Capture full size screenshot"
 → **Mac:** Cmd+Shift+4 (área) ou Cmd+Shift+3 (tela cheia)
-→ **Qualquer resolução serve.** PNG @2x é ideal, mas não obrigatório.
+→ Qualquer resolução. PNG @2x ideal, não obrigatório.
 
 Assim que receber a imagem, aplico First Read + Slop Score + Audit completo.
 ```
 
-**Once the screenshot arrives**, apply the full critique protocol — same first read, same Slop Score, same audit table, same top 3, same direction, same preserve. Do not downgrade the output.
+Once the screenshot arrives, apply the full critique — same first read, same Slop Score, same audit table, same top 3, same direction, same preserve. Append: `Critique via screenshot manual.`
 
-**At the end of the critique**, append one line:
-`Critique via screenshot fallback (URL inacessível).`
+**Never guess or invent page content.** Critiquing imagined content is exactly the kind of slop this skill exists to prevent.
 
-**Never guess or invent page content from the URL.** Critiquing imagined content is exactly the kind of slop this skill exists to prevent.
+### Installing Playwright MCP (reference, mention only if user asks)
+
+```bash
+claude mcp add playwright -s user -- npx @playwright/mcp@latest
+```
+
+Restart the agent after install.
 
 ---
 
