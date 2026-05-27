@@ -4,8 +4,8 @@
 
 # anti-slop-os
 
-**Taste Design OS for the vibecoding era.**
-An Agent Skill that catches AI slop before it ships.
+**The Creative Director that lives inside your AI agent.**
+Catches the "AI look" before the design ships.
 
 [![Cursor](https://img.shields.io/badge/Cursor-supported-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-supported-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/claude/docs/claude-code)
@@ -35,30 +35,82 @@ moment you're prototyping fast and don't even know yet what will become a Figma.
 
 ---
 
-## Get Started in 60 seconds
+## Not a developer? You're fine.
 
-Three steps. Copy-paste each block, one at a time.
+You only need **three things**:
 
-### 1. Install
+1. A **terminal** open (Mac: open the "Terminal" app; Windows: "PowerShell")
+2. **git** installed ([download here](https://git-scm.com/downloads) if you don't have it)
+3. **Cursor** or **Claude Code** — that's where the magic happens
+
+Copy each code block below, paste in the terminal, press Enter. Done.
+
+---
+
+## Install in 3 steps
+
+### Step 1 — Download anti-slop-os to your machine
+
+Paste this in the terminal and press Enter:
 
 ```bash
-git clone git@github.com:jferracini/anti-slop-os.git ~/anti-slop-os
+git clone https://github.com/jferracini/anti-slop-os.git ~/anti-slop-os
+```
+
+> **What does this do?** Downloads the whole project to a folder called `anti-slop-os` in your home directory.
+> Already have that folder and want to start clean? Run first: `rm -rf ~/anti-slop-os`
+
+### Step 2 — Give the scripts permission to run
+
+```bash
 chmod +x ~/anti-slop-os/scripts/*.sh
-echo 'alias anti-slop="bash ~/anti-slop-os/scripts/init.sh"' >> ~/.zshrc
-source ~/.zshrc
+```
+
+> **What does this do?** Tells your system that those `.sh` files are executable.
+> Without this, the next step fails.
+
+### Step 3 — Install the Skill in Cursor and Claude Code
+
+```bash
 bash ~/anti-slop-os/scripts/install-skill.sh
 ```
 
-> Using bash? Replace `~/.zshrc` with `~/.bashrc`.
+> **What does this do?** Hooks anti-slop-os into your Cursor and Claude Code.
+> From now on, any chat in those agents can run `/critique`.
 
-This installs the skill in **both Cursor and Claude Code** (symlinks — `git pull`
-updates both at once).
+You should see something like:
 
-### 2. Reload your agent
+```
+→ Anti-Slop OS — Skill install
 
-Quit and reopen **Cursor** and **Claude Code** so they detect the new skill.
+  ✓ Cursor: symlinked → ~/.cursor/skills/anti-slop-os/SKILL.md
+  ✓ Claude Code: symlinked → ~/.claude/skills/anti-slop-os/SKILL.md
 
-### 3. Try it
+  Skill is now installed for Cursor and Claude Code.
+```
+
+### Step 4 (optional, recommended) — Create a shortcut command
+
+```bash
+echo 'alias anti-slop="bash ~/anti-slop-os/scripts/init.sh"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+> **What does this do?** Creates a short command called `anti-slop` you can use
+> inside any project (next section). Without it, you'd have to type the full path
+> every time.
+>
+> Using bash instead of zsh? Replace `~/.zshrc` with `~/.bashrc` in both commands.
+
+---
+
+## How to use it
+
+### Restart Cursor and Claude Code
+
+Quit and reopen them. That makes the Skill show up.
+
+### Try it in any chat
 
 Open any project in Cursor or Claude Code. In the chat, type:
 
@@ -66,42 +118,59 @@ Open any project in Cursor or Claude Code. In the chat, type:
 /critique
 
 Imagine a SaaS landing page with centered hero, purple-pink gradient,
-Inter font, three identical feature cards, "Get Started" button in the
-middle.
+Inter font, three identical feature cards, "Get Started" button in the middle.
 ```
 
-You should get back a structured critique with an AI Slop Score, a layer-by-layer
-audit (Typography / Color / Spacing / Layout / Motion), the top 3 problems with
-fixes, and a clear direction. Items that are OK come back as `CHECK` — no noise.
+You'll get back:
 
-That's it. The skill is now alive in every project, every conversation, in any
-agent that supports skills.
+- An **AI Slop Score** from 0 to 10
+- A layer-by-layer audit (typography, color, spacing, layout, motion)
+- The top 3 worst problems with concrete fixes
+- A clear direction to resolve them
 
----
+Items that are OK come back as `CHECK` — no filler.
 
-## Commands
+### Other commands
 
 | Command | What it does |
 |---|---|
-| `/critique` | Full structured critique (Slop Score + layer audit + top 3 + direction) |
-| `/critique-figma <url>` | Pulls the frame via the Figma MCP and audits it |
-| `/slop-check` | Quick — just the AI Slop Score, no full analysis |
+| `/critique` | Full structured critique (Slop Score + audit + top 3 + direction) |
+| `/critique-figma <frame-url>` | Pulls the frame via Figma MCP and audits it |
+| `/slop-check` | Quick — just the Slop Score, no full analysis |
 
-Triggers also activate naturally: `"review this design"`, `"is this AI slop?"`,
-`"audit this UI"`.
+Natural-language triggers also work: *"review this design"*, *"is this AI slop?"*, *"audit this UI"*.
 
 ---
 
-## How it works across agents
+## Use it inside a specific project
 
-| Agent | How it activates | What you do |
-|---|---|---|
-| **Cursor** | Skill auto-loaded from `~/.cursor/skills/anti-slop-os/` | Nothing — just use `/critique` |
-| **Claude Code** | Skill auto-loaded from `~/.claude/skills/anti-slop-os/` | Nothing — just use `/critique` |
-| **VS Code** | Reads `.cursorrules` in the project root | Run `anti-slop` in the project once |
-| **Claude.ai** (web/desktop) | Paste rules into Project instructions | See [Claude.ai setup](#claudeai-webdesktop-setup) |
+The Skill already works in any chat. But if you want **the project itself** to
+carry the rules (so collaborators inherit them, and the agent reads the protocol
+from disk), run it inside the project folder:
 
-### Claude.ai (web/desktop) setup
+```bash
+cd ~/path/to/your/project
+anti-slop
+```
+
+This creates:
+
+```
+your-project/
+├── .cursorrules              ← rules for Cursor and VS Code
+├── .claude/
+│   └── CLAUDE.md             ← rules for Claude Code
+├── .anti-slop/
+│   ├── core/                 ← philosophy + rules + checklist
+│   └── critique/             ← protocol + template
+└── PROJECT.md                ← project brief (preserved if it already exists)
+```
+
+Fill out `PROJECT.md` once. The Skill reads it on every `/critique`.
+
+---
+
+## Claude.ai (web/desktop)
 
 There's no local installer for Claude.ai. Setup is one-time copy-paste:
 
@@ -114,31 +183,17 @@ From now on, every conversation in that Project follows the anti-slop rules.
 
 ---
 
-## Per-project setup
+## Keep it up to date
 
-The global skill works in any chat. But if you also want **the project itself**
-to carry the rules (so collaborators get them too, and so the agent reads the
-critique protocol from disk), run `anti-slop` inside the project:
+Whenever you want to pull improvements from the repo:
 
 ```bash
-cd ~/path/to/your/project
-anti-slop
+cd ~/anti-slop-os && git pull
 ```
 
-This creates:
-
-```
-your-project/
-├── .cursorrules              ← Cursor + VS Code rules
-├── .claude/
-│   └── CLAUDE.md             ← Claude Code rules
-├── .anti-slop/
-│   ├── core/                 ← philosophy + rules + checklist
-│   └── critique/             ← critique protocol + template
-└── PROJECT.md                ← project brief (preserved if it already exists)
-```
-
-Fill out `PROJECT.md` once. The skill will read it on every `/critique`.
+The Skill was installed via symlink — it auto-updates in Cursor and Claude Code.
+Per-project files in your other repos refresh next time you run `anti-slop`.
+`PROJECT.md` is never overwritten.
 
 ---
 
@@ -152,8 +207,36 @@ Rules, critique protocol, and docs are localized:
 | English (EN) | [`core/en/`](./core/en/) | [`critique/en/`](./critique/en/) | this file |
 | Spanish (ES) | [`core/es/`](./core/es/) | [`critique/es/`](./critique/es/) | [README.es.md](./README.es.md) |
 
-The agent picks language from your conversation context. If you write the brief
-in Portuguese, the critique comes in Portuguese. Mix is fine.
+The agent picks the language from your conversation context. Write the brief in
+Portuguese, the critique comes back in Portuguese. Mixing is fine.
+
+---
+
+## Repo structure
+
+```
+anti-slop-os/
+├── SKILL.md                 Skill entry point (read by the agent)
+├── core/
+│   ├── PHILOSOPHY.md        the "why". read once.
+│   ├── RULES.md             operational rules (type, color, space, motion)
+│   ├── CHECKLIST.md         pre-delivery quality gate
+│   ├── en/                  English versions
+│   └── es/                  Spanish versions
+├── critique/
+│   ├── PROTOCOL.md          how a Design Critique is conducted
+│   ├── TEMPLATE.md          critique output format
+│   ├── en/                  English versions
+│   └── es/                  Spanish versions
+├── templates/
+│   ├── .cursorrules         goes to the project root
+│   ├── CLAUDE.md            goes to .claude/ in each project
+│   └── PROJECT.md           project brief (filled once)
+└── scripts/
+    ├── init.sh              sets up a project (creates the files above)
+    ├── install-skill.sh     installs the Skill in Cursor + Claude Code
+    └── test-setup.sh        validates the install
+```
 
 ---
 
@@ -162,22 +245,41 @@ in Portuguese, the critique comes in Portuguese. Mix is fine.
 | File | What you'll find |
 |---|---|
 | [docs/TEST-GUIDE.md](./docs/TEST-GUIDE.md) | 15-min hands-on test (no programming) |
-| [core/PHILOSOPHY.md](./core/PHILOSOPHY.md) | The "why" — operational truths behind the skill |
+| [core/PHILOSOPHY.md](./core/PHILOSOPHY.md) | The "why" — operational truths behind the Skill |
 | [core/RULES.md](./core/RULES.md) | All anti-slop rules (typography, color, spacing, layout, motion, components) |
 | [core/CHECKLIST.md](./core/CHECKLIST.md) | Pre-delivery quality gate (AI Slop Score) |
 | [critique/PROTOCOL.md](./critique/PROTOCOL.md) | How a Design Critique is conducted |
 
 ---
 
-## Update everything
+## Common issues
 
-```bash
-cd ~/anti-slop-os && git pull
-```
+**`fatal: destination path '...' already exists and is not an empty directory.`**
+You cloned before. Run `rm -rf ~/anti-slop-os` and try `git clone` again.
 
-That's it. Symlinks make the skill auto-update in Cursor and Claude Code.
-Per-project files in your other repos refresh next time you run `anti-slop`
-(`PROJECT.md` is preserved — never overwritten).
+**`/critique` doesn't show up in Cursor / Claude Code.**
+Quit and reopen the app entirely. Skills only appear after a restart.
+
+**`bash: ...install-skill.sh: No such file or directory`**
+Your clone is outdated. Run `cd ~/anti-slop-os && git pull`.
+
+**Want to uninstall?**
+Remove the symlinks: `rm -rf ~/.cursor/skills/anti-slop-os ~/.claude/skills/anti-slop-os`.
+Then remove the folder: `rm -rf ~/anti-slop-os`.
+
+---
+
+## Quick reference
+
+| Situation | Command |
+|---|---|
+| First time on a machine | `git clone` + `install-skill.sh` |
+| New project | `cd project && anti-slop` |
+| Existing project | `cd project && anti-slop` + fill PROJECT.md |
+| Update rules | `cd ~/anti-slop-os && git pull` |
+| Design Critique | `/critique` in Cursor or Claude |
+| Figma critique | `/critique-figma <url>` in Cursor or Claude |
+| Sync another machine | Steps 1, 2, and 3 there too |
 
 ---
 
