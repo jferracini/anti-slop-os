@@ -5,7 +5,30 @@
 Envie uma tela, slide, frame ou componente com o comando:
 `/critique [contexto opcional]`
 
-O output seguirá este protocolo obrigatoriamente.
+A entrada pode ser Figma, web, PDF, slides ou imagem — veja `critique/INPUT.md`
+para rotear antes de criticar.
+
+---
+
+## Modos de saída
+
+**Quick (default).** Lidere pela decisão, não pela tabela. É o que `/critique`
+entrega por padrão e o que `/slop-check` sempre faz.
+
+`/slop-check` = só o essencial, em 3 linhas:
+```
+Slop Score: X/10 — [o item que mais pesa]
+Decisão: [a única correção mais importante, específica]
+```
+Sem tabela, sem audit camada a camada. Se o usuário quiser o resto, ele pede.
+
+`/critique` quick = First read (2 linhas) + Slop Score + os 1–3 problemas reais
+(pule camadas CHECK) + Direção. Sem tabela completa a menos que ajude.
+
+**Full (`--full`).** O laudo completo abaixo: audit camada a camada em tabela,
+top 3 com causa raiz, direção e o que preservar. Use só quando pedido.
+
+Em ambos os modos: marque camadas OK como `CHECK` e não as detalhe.
 
 ---
 

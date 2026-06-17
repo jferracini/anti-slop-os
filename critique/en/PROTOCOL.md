@@ -5,7 +5,30 @@
 Send a screen, slide, frame, or component with the command:
 `/critique [optional context]`
 
-The output must follow this protocol.
+The input can be Figma, web, PDF, slides, or an image — see `critique/INPUT.md`
+to route it before critiquing.
+
+---
+
+## Output modes
+
+**Quick (default).** Lead with the decision, not the table. This is what `/critique`
+delivers by default and what `/slop-check` always does.
+
+`/slop-check` = just the essentials, in 3 lines:
+```
+Slop Score: X/10 — [the single heaviest item]
+Decision: [the one most important, specific fix]
+```
+No table, no layer-by-layer audit. If the user wants the rest, they ask.
+
+`/critique` quick = First read (2 lines) + Slop Score + the 1–3 real problems
+(skip CHECK layers) + Direction. No full table unless it helps.
+
+**Full (`--full`).** The complete report below: layer-by-layer audit table, top 3
+with root cause, direction, and what to preserve. Use only when asked.
+
+In both modes: mark OK layers `CHECK` and do not detail them.
 
 ---
 

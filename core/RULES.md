@@ -1,5 +1,7 @@
 # ANTI-SLOP RULES — OPERATIONAL
 
+> Fonte única das regras de craft. Não duplicar em SKILL.md, .cursorrules ou CLAUDE.md — esses arquivos apenas apontam para cá.
+
 ## TYPOGRAPHY
 
 - PROIBIDO como default: Inter, Roboto, Arial, Space Grotesk, DM Sans
