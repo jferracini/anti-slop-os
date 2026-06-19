@@ -81,18 +81,34 @@
   .hero h1 em{font-style:normal;font-weight:900;color:var(--accent)}
   .lede{font-size:clamp(1.15rem,1.7vw,1.4rem);color:var(--muted);max-width:46ch;margin:22px 0 0;line-height:1.5}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:var(--s4)}
-  /* the scorecard motif — the page critiques itself */
-  .scorecard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
-  .sc-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line)}
-  .sc-row:last-child{border-bottom:0}
-  .sc-label{font-size:.96rem;line-height:1.3}
-  .sc-bad .sc-label{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:2px;color:var(--muted)}
-  .badge{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:900;font-size:1.5rem;flex:none}
-  .badge.bad{color:var(--muted);font-size:1.15rem}
-  .badge.good{color:var(--brand);font-size:2.1rem}
-  /* de-emphasize the slop row with explicit muted colour, not opacity (protects contrast) */
-  .sc-row.sc-bad .sc-label,.sc-row.sc-bad .badge{color:var(--muted)}
-  .sc-cap{font-size:.82rem;letter-spacing:.01em;color:var(--muted);margin:0 0 10px;font-weight:600}
+  /* the scorecard motif — the page critiques itself. Type tension carries it:
+     the slop output is a small, struck reference; the authored score is the protagonist
+     (a big number that rolls down 10 → 2.1, odometer-style, on reveal). */
+  .scorecard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 26px 20px}
+  .sc-cap{font-size:.92rem;color:var(--muted);margin:0 0 18px;font-weight:600}
+  .sc-tag{display:inline-block;font-size:.82rem;font-weight:800;margin-bottom:8px}
+  .sc-desc{margin:0;line-height:1.35}
+  /* slop — the struck reference, deliberately small */
+  .sc-bad{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .sc-bad .sc-txt{min-width:0}
+  .sc-bad .sc-tag{color:var(--accent)}
+  .sc-bad .sc-desc{font-size:.9rem;color:var(--muted);max-width:32ch;text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:2px}
+  .sc-mini{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:900;font-size:1.35rem;color:var(--muted);flex:none;font-variant-numeric:tabular-nums;line-height:1}
+  /* authored — the protagonist */
+  .sc-good{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:18px}
+  .sc-good .sc-txt{min-width:0}
+  .sc-good .sc-tag{color:var(--brand)}
+  .sc-good .sc-desc{font-size:1.04rem;color:var(--ink)}
+  .sc-score{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:900;font-size:clamp(3.4rem,6.2vw,4.6rem);line-height:.88;color:var(--brand);
+            flex:none;font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:right;min-width:2.7em;transition:transform .25s ease}
+  .sc-score.rolling{filter:blur(.4px)}
+  .sc-score.rolled{animation:scoreSettle .42s cubic-bezier(.2,1.5,.45,1)}
+  @keyframes scoreSettle{0%{transform:scale(1.07)}100%{transform:scale(1)}}
+  .sc-foot{font-size:.86rem;color:var(--muted);margin:18px 0 0;padding-top:14px;border-top:1px dashed var(--line)}
+  .sc-foot b{color:var(--ink);font-weight:700}
+  @media (prefers-reduced-motion:reduce){.sc-score{transition:none}.sc-score.rolled{animation:none}}
+  /* confetti burst when the score lands */
+  .confetti-pc{position:fixed;left:0;top:0;width:9px;height:13px;border-radius:2px;pointer-events:none;z-index:90;will-change:transform,opacity}
   @media (max-width:880px){.hero-copy{grid-template-columns:1fr;gap:32px}.hero{padding-top:24px;padding-bottom:48px}}
 
   /* ---- generic section ---- */
@@ -224,17 +240,26 @@
         </div>
       </div>
 
-      <aside class="scorecard reveal" aria-label="Example critique">
-        <p class="sc-cap">Same brief, two outputs</p>
-        <div class="sc-row sc-bad">
-          <span class="sc-label">Centered hero · purple-pink gradient · Inter · 3 identical cards</span>
-          <span class="badge bad">9.0</span>
+      <aside class="scorecard reveal" aria-label="Example critique: the same brief scored as slop versus authored">
+        <p class="sc-cap">Same brief · two outputs</p>
+
+        <div class="sc-bad">
+          <div class="sc-txt">
+            <span class="sc-tag">The “AI look”</span>
+            <p class="sc-desc">Centered hero · purple-pink gradient · Inter · 3 identical cards</p>
+          </div>
+          <span class="sc-mini" aria-label="scores 9.0 out of 10">9.0</span>
         </div>
-        <div class="sc-row">
-          <span class="sc-label">Authored: real grid, type tension, one intentional accent</span>
-          <span class="badge good">2.1</span>
+
+        <div class="sc-good">
+          <div class="sc-txt">
+            <span class="sc-tag">Authored</span>
+            <p class="sc-desc">Real grid · type tension · one intentional accent</p>
+          </div>
+          <span class="sc-score" data-roll data-from="10.0" data-to="2.1" aria-label="AI Slop Score 2.1 out of 10">2.1</span>
         </div>
-        <p class="sc-cap" style="margin:14px 0 0">AI Slop Score · 0 authored → 10 slop</p>
+
+        <p class="sc-foot">AI Slop Score · <b>0</b> authored → <b>10</b> slop</p>
       </aside>
     </div>
   </section>
@@ -363,6 +388,80 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     blocks.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* A little burst of confetti when the score lands on 2.1 — the small reward for authorship.
+     Particles are physics-driven and self-clean. Skipped entirely for reduced-motion. */
+  function confettiBurst(x, y) {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var colors = ['#0d5c63', '#ff3b1f', '#f2a900', '#2f8f99', '#1a1a17'];
+    var pieces = [], N = 38;
+    for (var i = 0; i < N; i++) {
+      var el = document.createElement('span');
+      el.className = 'confetti-pc';
+      el.style.background = colors[i % colors.length];
+      if (i % 3 === 0) el.style.borderRadius = '50%';
+      document.body.appendChild(el);
+      var ang = Math.random() * Math.PI * 2, sp = 5 + Math.random() * 9;
+      pieces.push({
+        el: el, x: x, y: y,
+        vx: Math.cos(ang) * sp,
+        vy: Math.sin(ang) * sp - (5 + Math.random() * 4),
+        rot: Math.random() * 360, vr: (Math.random() - 0.5) * 26,
+        life: 0, max: 60 + Math.random() * 32
+      });
+    }
+    function tick() {
+      var alive = false;
+      for (var i = 0; i < pieces.length; i++) {
+        var o = pieces[i];
+        if (!o.el) continue;
+        o.life++; o.vy += 0.5; o.vx *= 0.98; o.vy *= 0.98;
+        o.x += o.vx; o.y += o.vy; o.rot += o.vr;
+        var t = o.life / o.max;
+        o.el.style.transform = 'translate(' + o.x + 'px,' + o.y + 'px) rotate(' + o.rot + 'deg)';
+        o.el.style.opacity = t > 0.7 ? String(1 - (t - 0.7) / 0.3) : '1';
+        if (o.life >= o.max) { o.el.remove(); o.el = null; } else alive = true;
+      }
+      if (alive) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* The score rolls down like an odometer: 10 → 2.1 on reveal — the page dropping its own
+     slop score. Skipped for reduced-motion users, who just see the final value. */
+  (function () {
+    var el = document.querySelector('[data-roll]');
+    if (!el) return;
+    var to = parseFloat(el.getAttribute('data-to'));
+    var from = parseFloat(el.getAttribute('data-from'));
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { el.textContent = to.toFixed(1); return; }
+    function run() {
+      var dur = 1500, start = null;
+      el.classList.add('rolling');
+      function step(ts) {
+        if (start === null) start = ts;
+        var t = Math.min(1, (ts - start) / dur);
+        var e = 1 - Math.pow(1 - t, 3);            // easeOutCubic — fast, then settles
+        el.textContent = (from + (to - from) * e).toFixed(1);
+        if (t < 1) { requestAnimationFrame(step); }
+        else {
+          el.textContent = to.toFixed(1);
+          el.classList.remove('rolling');
+          el.classList.add('rolled');
+          var r = el.getBoundingClientRect();
+          confettiBurst(r.left + r.width / 2, r.top + r.height / 2);
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var io2 = new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) { if (en.isIntersecting) { setTimeout(run, 280); io2.disconnect(); } });
+      }, { threshold: 0.4 });
+      io2.observe(el);
+    } else { setTimeout(run, 400); }
   })();
 </script>
 
