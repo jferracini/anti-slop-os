@@ -36,6 +36,25 @@ ratio, no mono-as-aesthetic, no tiny fonts, density that varies between sections
 
 ---
 
+## STRUCTURAL SANITY — the minimum done well (scan the RENDERED layout)
+
+Aesthetic slop is half of it. The other half is **structural failure**: the layout that
+looks right in the code but breaks to the human eye. A skill that guides decisions cannot
+get the basics wrong. Before emitting, also scan this list:
+
+| # | Failure | How to detect | The right way |
+|---|---|---|---|
+| S1 | `padding` shorthand collision | container (`.wrap`) and block (`section`/`hero`) both set `padding: a b` → the more specific selector zeroes the other's axis (the side gutter disappears, or the vertical rhythm disappears) | **longhand per axis**: the container owns `padding-left/right`; sections own `padding-top/bottom`. Never the shorthand on both. |
+| S2 | Grid/flex horizontal overflow | a long word/line bursts to the right, clips text, misaligns the whole page | text children need `min-width:0` (the default `auto` blocks shrinking and forces the overflow) |
+| S3 | Children count ≠ columns | a 2-column grid with 3 children → the 3rd lands in the wrong (narrow) track and breaks the width | group the content in a wrapper, or place it explicitly (`grid-column`) |
+| S4 | Boxed vs fluid undecided | dividers/sections at different widths; nav off the content axis | **decide and declare**. Boxed: one container, fixed gutter, nav + sections on the same axis. A full-bleed band is an intentional exception whose content re-enters the container |
+| S5 | Contrast lost to specificity | the color you wrote on the button/link is not the one that renders (a more specific rule won) | check the **computed** color, not the one you wrote; raise the specificity of the right state |
+| S6 | Label glued to the divider | eyebrow/tag touching the section line, no breathing room | real breathing room at the top (the section's vertical padding); and avoid the all-caps eyebrow + wide stroke (see tell #2) |
+
+**Golden rule:** the final judge is the **eye on the rendered layout**, not code that looks correct.
+
+---
+
 ## THE FLOW — 4 phases
 
 **Hybrid** mode: ask the 2–3 essential Phase 0 questions. If the user does not answer,
@@ -61,6 +80,7 @@ If it is a Nu product for nubankers → see `core/nu/TOKENS.md`. Otherwise, skip
 Run the table scan above on your own draft. Any tell without declared intent → fix.
 Confirm: grid present · contrast audited · scale with a ratio · no mono-aesthetic ·
 no tiny fonts.
+**Also** run the Structural sanity scan (S1–S6) — the minimum done well cannot fail.
 
 ### Phase 4 — Self-check + report (optional)
 Pass the Generation gate (below). With `--report`, fill `critique/report-template.html`
@@ -101,8 +121,9 @@ exploration is not an excuse for slop.
 - **Nielsen (10 heuristics)** — system status visibility, match with the real world,
   control and freedom, consistency, error prevention, recognition > recall, flexibility,
   minimalist aesthetic, error recovery, help/documentation.
-- **WCAG AA** — contrast ≥ 4.5:1, visible focus, keyboard navigation, image alt,
-  `prefers-reduced-motion`, color never as the only meaning.
+- **WCAG AA** — contrast ≥ 4.5:1 measured against the **real** background colour (on a
+  coloured/dark band, not against the page white; struck-through/"killed" text also ≥ 4.5:1),
+  visible focus, keyboard navigation, image alt, `prefers-reduced-motion`, color never as the only meaning.
 
 ---
 

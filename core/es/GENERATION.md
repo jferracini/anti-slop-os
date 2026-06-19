@@ -36,6 +36,25 @@ con ratio, sin mono-estética, sin fuentes minúsculas, densidad que varía entr
 
 ---
 
+## SANIDAD ESTRUCTURAL — el mínimo bien hecho (escanea el layout RENDERIZADO)
+
+El slop estético es la mitad. La otra mitad es **falla estructural**: el layout que parece
+correcto en el código pero se rompe al ojo humano. Una skill que guía decisiones no puede
+errar lo básico. Antes de emitir, escanea también esta lista:
+
+| # | Falla | Cómo detectar | Lo correcto |
+|---|---|---|---|
+| S1 | Colisión de `padding` shorthand | container (`.wrap`) y bloque (`section`/`hero`) ambos con `padding: a b` → el selector más específico anula el eje del otro (desaparece el gutter lateral, o el ritmo vertical) | **longhand por eje**: el container manda en `padding-left/right`; las secciones en `padding-top/bottom`. Nunca el shorthand en ambos. |
+| S2 | Overflow horizontal de grid/flex | una palabra/línea larga se desborda a la derecha, corta texto, desalinea toda la página | los hijos de texto necesitan `min-width:0` (el default `auto` impide encoger y fuerza el overflow) |
+| S3 | Nº de hijos ≠ columnas | grid de 2 columnas con 3 hijos → el 3º cae en la columna equivocada (angosta) y rompe el ancho | agrupa el contenido en un wrapper, o posiciónalo explícito (`grid-column`) |
+| S4 | Boxed vs fluid indeciso | dividers/secciones con anchos distintos; nav fuera del eje del contenido | **decide y declara**. Boxed: un container, gutter fijo, nav + secciones en el mismo eje. La banda full-bleed es excepción intencional cuyo contenido re-entra al container |
+| S5 | Contraste perdido por especificidad | el color que escribiste en el botón/link no es el que renderiza (una regla más específica ganó) | revisa el color **computado**, no el que escribiste; sube la especificidad del estado correcto |
+| S6 | Rótulo pegado al divider | eyebrow/tag tocando la línea de sección, sin respiro | respiro real arriba (el padding vertical de la sección); y evita el eyebrow mayúsculas + trazo ancho (ver tell #2) |
+
+**Regla de oro:** el juez final es el **ojo en el layout renderizado**, no el código que parece correcto.
+
+---
+
 ## EL FLUJO — 4 fases
 
 Modo **híbrido**: haz las 2–3 preguntas esenciales de la Fase 0. Si el usuario no responde,
@@ -61,6 +80,7 @@ Si es producto Nu para nubankers → ver `core/nu/TOKENS.md`. Si no, sáltalo.
 Corre el escaneo de la tabla de arriba sobre tu propio borrador. Cualquier tell sin
 intención declarada → corrige. Confirma: grid presente · contraste auditado · escala con
 ratio · sin mono-estética · sin fuentes minúsculas.
+Corre **también** el escaneo de Sanidad estructural (S1–S6) — el mínimo bien hecho no puede fallar.
 
 ### Fase 4 — Self-check + report (opcional)
 Pasa el Generation gate (abajo). Con `--report`, completa `critique/report-template.html`
@@ -101,8 +121,9 @@ prohibida** — explorar no es excusa para slop.
 - **Nielsen (10 heurísticas)** — visibilidad del estado, match con el mundo real, control
   y libertad, consistencia, prevención de error, reconocer > recordar, flexibilidad,
   estética minimalista, recuperación de error, ayuda/documentación.
-- **WCAG AA** — contraste ≥ 4.5:1, foco visible, navegación por teclado, alt en imagen,
-  `prefers-reduced-motion`, el color nunca como único significado.
+- **WCAG AA** — contraste ≥ 4.5:1 medido contra el color **real** del fondo (en banda de
+  color/oscura, no contra el blanco de la página; el texto tachado/"apagado" también ≥ 4.5:1),
+  foco visible, navegación por teclado, alt en imagen, `prefers-reduced-motion`, el color nunca como único significado.
 
 ---
 
