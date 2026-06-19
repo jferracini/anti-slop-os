@@ -7,6 +7,8 @@
 **The Creative Director that lives inside your AI agent.**
 Catches the "AI look" before the design ships.
 
+### 🌐 Live page → https://jferracini.github.io/anti-slop-os/
+
 [![Cursor](https://img.shields.io/badge/Cursor-supported-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-supported-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/claude/docs/claude-code)
 [![Claude.ai](https://img.shields.io/badge/Claude.ai-copy_paste-D97757?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai)
