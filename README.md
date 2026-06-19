@@ -1,6 +1,6 @@
 <div align="center">
 
-![anti-slop-os](./assets/cover.png)
+![anti-slop-os — a flat-lay of analog design-craft tools: a loupe, a floppy disk, a vintage mouse, a notebook, a Rotring pencil and printer's rulers](./assets/hero.png)
 
 # anti-slop-os
 
@@ -29,6 +29,10 @@ the output against:
 - **Anti-slop rules** — stops Inter-by-default, generic gradients, centered-everything, bento-without-hierarchy, and the rest of the "AI SaaS 2024" defaults
 - **A scored critique protocol** — 0–10 AI Slop Score + layer-by-layer audit + concrete direction
 - **An output gate** — three mandatory questions before any UI ships (visual tension, what couldn't be AI-generated, what was intentionally NOT optimized)
+
+And when you generate from scratch, `/design` runs the same ruler **at generation
+time** — an anti-AI-signature firewall (intent gate → grid → contrast → self-scan) so
+the slop never gets born, instead of only being caught after.
 
 It does not replace formal design critique. It runs **before** that — in the
 moment you're prototyping fast and don't even know yet what will become a Figma.
@@ -137,8 +141,38 @@ Items that are OK come back as `CHECK` — no filler.
 | `/critique` | Full structured critique (Slop Score + audit + top 3 + direction) |
 | `/critique-figma <frame-url>` | Pulls the frame via Figma MCP and audits it |
 | `/slop-check` | Quick — just the Slop Score, no full analysis |
+| `/design [screen \| landing \| component]` | Generate new UI through the anti-AI-signature guardrail |
+| `/report` | Turn any critique into a friendly, shareable visual HTML report |
 
 Natural-language triggers also work: *"review this design"*, *"is this AI slop?"*, *"audit this UI"*.
+
+### Generate, don't just critique
+
+`/critique` catches slop after the fact. `/design` stops it from being born:
+
+```
+/design a pricing page for a developer tool
+```
+
+It runs a 4-phase flow — an intent gate (asks the 2–3 essential questions), a decision
+lock (type, color, grid, motion — one justified line each), an **anti-AI-signature
+firewall** it runs on its own draft, and a final "one bold move" gate — then hands you
+the result plus the decisions behind it. Add `--report` to also get a visual report.
+
+### Turn a critique into a visual report
+
+Want something you can share or drop into a deck? After any critique, run:
+
+```
+/report
+```
+
+It renders the critique as a clean, friendly **HTML page** — the AI Slop Score, the audit
+layers (Type, Color, Spacing, Layout, Motion, A11y), and the top fixes — and saves it as
+`slop-report.html` in your project. Open it with `open slop-report.html`.
+
+The report never invents a score: it only renders what the critique actually produced.
+You can also trigger it inline with `/critique --report`.
 
 ---
 
@@ -217,15 +251,23 @@ Portuguese, the critique comes back in Portuguese. Mixing is fine.
 ```
 anti-slop-os/
 ├── SKILL.md                 Skill entry point (read by the agent)
+├── commands/
+│   ├── critique.md          /critique — full structured critique
+│   ├── slop-check.md        /slop-check — quick Slop Score only
+│   ├── design.md            /design — generate UI through the guardrail
+│   └── report.md            /report — render a critique as a visual report
 ├── core/
 │   ├── PHILOSOPHY.md        the "why". read once.
 │   ├── RULES.md             operational rules (type, color, space, motion)
 │   ├── CHECKLIST.md         pre-delivery quality gate
+│   ├── GENERATION.md        the generation guardrail + anti-AI-signature firewall
 │   ├── en/                  English versions
 │   └── es/                  Spanish versions
 ├── critique/
 │   ├── PROTOCOL.md          how a Design Critique is conducted
 │   ├── TEMPLATE.md          critique output format
+│   ├── INPUT.md             routes Figma / web / image / PDF inputs
+│   ├── report-template.html the HTML report /report fills in
 │   ├── en/                  English versions
 │   └── es/                  Spanish versions
 ├── templates/
@@ -248,7 +290,9 @@ anti-slop-os/
 | [core/PHILOSOPHY.md](./core/PHILOSOPHY.md) | The "why" — operational truths behind the Skill |
 | [core/RULES.md](./core/RULES.md) | All anti-slop rules (typography, color, spacing, layout, motion, components) |
 | [core/CHECKLIST.md](./core/CHECKLIST.md) | Pre-delivery quality gate (AI Slop Score) |
+| [core/GENERATION.md](./core/GENERATION.md) | The generation guardrail + anti-AI-signature firewall (used by `/design`) |
 | [critique/PROTOCOL.md](./critique/PROTOCOL.md) | How a Design Critique is conducted |
+| [critique/report-template.html](./critique/report-template.html) | The HTML template `/report` fills with real critique data |
 
 ---
 
@@ -279,6 +323,8 @@ Then remove the folder: `rm -rf ~/anti-slop-os`.
 | Update rules | `cd ~/anti-slop-os && git pull` |
 | Design Critique | `/critique` in Cursor or Claude |
 | Figma critique | `/critique-figma <url>` in Cursor or Claude |
+| Generate new UI | `/design <screen \| landing \| component>` |
+| Visual report | `/report` (or `/critique --report`) |
 | Sync another machine | Steps 1, 2, and 3 there too |
 
 ---
