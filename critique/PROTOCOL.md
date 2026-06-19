@@ -28,7 +28,15 @@ Sem tabela, sem audit camada a camada. Se o usuário quiser o resto, ele pede.
 **Full (`--full`).** O laudo completo abaixo: audit camada a camada em tabela,
 top 3 com causa raiz, direção e o que preservar. Use só quando pedido.
 
+**Report (`--report`).** Renderize o resultado como página visual: preencha
+`critique/report-template.html` com os dados reais (nunca invente score) e salve
+`slop-report.html`. Ver comando `/report`.
+
 Em ambos os modos: marque camadas OK como `CHECK` e não as detalhe.
+
+> **Gerar novo design (não criticar)?** Use `/design` — roda o firewall anti-assinatura
+> de AI antes de emitir (ver `core/GENERATION.md`). Critique conserta depois; geração com
+> guardrail evita o slop nascer.
 
 ---
 
