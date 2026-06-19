@@ -347,6 +347,8 @@ Continuous craft learning with AI as a think partner. That's the bet.
 
 <div align="center">
 
-**Built by [@jferracini](https://github.com/jferracini) · For anyone vibecoding**
+**Built by [Julio Ferracini](https://julioferracini.design/) · [@jferracini](https://github.com/jferracini) · For anyone vibecoding**
+
+[julioferracini.design](https://julioferracini.design/) · [Live page](https://jferracini.github.io/anti-slop-os/)
 
 </div>
